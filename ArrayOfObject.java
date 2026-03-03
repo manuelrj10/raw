@@ -23,7 +23,27 @@ class Employee{
 
     void incrementSalary(double percent){
     salary = salary + (salary * percent / 100);
-}
+    }
+    static void deleteEmployee(Employee[] emp, int id) {
+        int targetId=-1;
+        for(int i=0;i<emp.length;i++){
+            if(emp[i]!=null && emp[i].id==id){
+                targetId=i;
+                break;
+            }
+        }
+        if(targetId==-1){
+            System.out.println("employee not found");
+            return;
+        }
+        for(int i=targetId;i<emp.length-1;i++){
+            emp[i]=emp[i+1];
+        }
+        emp[emp.length - 1] = null;
+    
+    System.out.println("Employee with ID " + id + " deleted successfully.");
+
+    }
 
 }
 class ArrayOfObject{
@@ -36,16 +56,18 @@ class ArrayOfObject{
             System.out.println("enter the id");
             int id=sc.nextInt();
             System.out.println("enter the name");
-            String name=sc.next();
+            sc.nextLine();
+            String name=sc.nextLine();
             System.out.println("enter the salary");
             double salary=sc.nextDouble();
             emp[i]=new Employee(id, name, salary);
         }
         System.out.println("EMPLOYEE DETAILS");
-        for(int i=0;i<emp.length;i++){
-            emp[i].display();
-            System.out.println(" ");
-        }
+        for (int i = 0; i < emp.length; i++) {
+        if (emp[i] != null) { // CRITICAL CHECK
+         emp[i].display();
+    }
+}
        
         int maxIndex=0;
          for(int i=1;i<emp.length;i++){
